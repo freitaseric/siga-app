@@ -1,0 +1,19 @@
+# Windows / Visual Studio / C# specific ignores for the Windows client
+
+# Visual Studio user-specific files
+*.suo
+*.user
+.vs/
+
+# Build output folders
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+arm64/
+
+# NuGet packages folder
+packages/
+*.nupkg

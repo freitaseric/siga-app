@@ -1,0 +1,14 @@
+# General .gitignore for the SIGA Monorepo
+
+# IDE and Editor configuration files
+.idea/
+.vscode/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# General log and temp files
+*.log
+*.tmp
+*.swp

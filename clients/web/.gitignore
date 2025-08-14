@@ -1,0 +1,28 @@
+# Node.js / Web Framework specific ignores for the Web client
+
+# Dependencies
+node_modules/
+
+# Build output folders for various frameworks (Next.js, SvelteKit, Vite, etc.)
+dist/
+build/
+.output/
+.next/
+.svelte-kit/
+
+# Environment variables - DO NOT COMMIT .env FILES!
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+!.env.example
+
+# Package manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Test coverage reports
+coverage/
