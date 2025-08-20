@@ -1,0 +1,43 @@
+# Logs & temp
+*.log
+*.tmp
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs / Editors
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+
+# Eclipse / STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# NetBeans
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+
