@@ -1,0 +1,71 @@
+spring:
+  cache:
+    type: simple
+
+  datasource:
+    url: "jdbc:postgresql://db:5432/${POSTGRES_DB}"
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        use_sql_comments: false
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+        batch_versioned_data: true
+    open-in-view: false
+
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /api
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024
+
+logging:
+  level:
+    root: INFO
+    br.gov.rr.canta.siga: INFO
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: INFO
+    org.springframework.web: INFO
+    org.springframework.data: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: /dev/stdout
+
+jwt:
+  secret: ${JWT_SECRET}
+  issuer: ${JWT_ISSUER}
+  access-token:
+    expiration: ${JWT_ACCESS_EXPIRATION:4h}
+  refresh-token:
+    expiration: ${JWT_REFRESH_EXPIRATION:30d}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+      show-components: always
+    info:
+      enabled: true
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+
