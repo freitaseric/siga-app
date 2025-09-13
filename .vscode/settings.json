@@ -1,0 +1,32 @@
+{
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.biome": "always",
+      "source.organizeImports.biome": "always",
+      "source.removeUnusedImports": "always",
+      "source.addMissingImports.ts": "always"
+    }
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.biome": "always",
+      "source.organizeImports.biome": "always",
+      "source.removeUnusedImports": "always",
+      "source.addMissingImports.ts": "always"
+    }
+  },
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.biome": "always",
+      "source.organizeImports.biome": "always",
+      "source.removeUnusedImports": "always",
+      "source.addMissingImports.ts": "always"
+    }
+  }
+}
