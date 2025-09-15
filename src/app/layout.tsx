@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
+import { ModeToggle } from "@/components/ModeToggle";
 
 export const metadata: Metadata = {
   title: "SIGA App",
@@ -22,6 +23,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <ModeToggle />
         </ThemeProvider>
       </body>
     </html>
