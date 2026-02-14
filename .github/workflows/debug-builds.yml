@@ -44,7 +44,7 @@ jobs:
           cache: 'gradle'
 
       - name: Build Shared Framework (iOS)
-        run: ./gradlew :shared:assembleIosArm64Debug
+        run: ./gradlew :shared:linkDebugFrameworkIosArm64
 
       - name: Build iOS App (No Signing)
         run: |
