@@ -1,0 +1,90 @@
+import com.freitaseric.siga.domain.model.ServiceCategory;
+
+CREATE TABLE ProducerEntity (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    cpf TEXT NOT NULL,
+    caf TEXT,
+    address TEXT NOT NULL
+);
+
+CREATE TABLE ServiceEntity (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    category TEXT AS ServiceCategory NOT NULL
+);
+
+CREATE TABLE ReportEntity (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    producerId INTEGER NOT NULL,
+    areaWorked REAL,
+    cropInfo TEXT NOT NULL,
+    latitude REAL,
+    longitude REAL,
+    observations TEXT NOT NULL,
+    createdAt INTEGER NOT NULL,
+    FOREIGN KEY (producerId) REFERENCES ProducerEntity(id)
+);
+
+CREATE TABLE ReportServiceEntity (
+    reportId INTEGER NOT NULL,
+    serviceId INTEGER NOT NULL,
+    PRIMARY KEY (reportId, serviceId),
+    FOREIGN KEY (reportId) REFERENCES ReportEntity(id) ON DELETE CASCADE,
+    FOREIGN KEY (serviceId) REFERENCES ServiceEntity(id)
+);
+
+CREATE TABLE ReportPhotoEntity (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    reportId INTEGER NOT NULL,
+    photoPath TEXT NOT NULL,
+    FOREIGN KEY (reportId) REFERENCES ReportEntity(id) ON DELETE CASCADE
+);
+
+insertProducer:
+INSERT INTO ProducerEntity(name, cpf, caf, address)
+VALUES (?, ?, ?, ?);
+
+selectAllProducers:
+SELECT * FROM ProducerEntity;
+
+insertService:
+INSERT INTO ServiceEntity(name, category)
+VALUES (?, ?);
+
+selectAllServices:
+SELECT * FROM ServiceEntity;
+
+insertReport:
+INSERT INTO ReportEntity(producerId, areaWorked, cropInfo, latitude, longitude, observations, createdAt)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+lastInsertId:
+SELECT last_insert_rowid();
+
+insertReportPhoto:
+INSERT INTO ReportPhotoEntity(reportId, photoPath) VALUES (?, ?);
+
+insertReportService:
+INSERT INTO ReportServiceEntity(reportId, serviceId) VALUES (?, ?);
+
+selectAllReports:
+SELECT
+    R.*,
+    P.name AS producerName
+FROM ReportEntity R
+JOIN ProducerEntity P ON R.producerId = P.id;
+
+selectAllReportsFull:
+SELECT
+    R.*,
+    P.name AS producerName,
+    (SELECT GROUP_CONCAT(S.name, ', ')
+     FROM ServiceEntity S
+     JOIN ReportServiceEntity RS ON S.id = RS.serviceId
+     WHERE RS.reportId = R.id) AS serviceNames,
+    (SELECT GROUP_CONCAT(photoPath, '|')
+     FROM ReportPhotoEntity
+     WHERE reportId = R.id) AS allPhotos
+FROM ReportEntity R
+JOIN ProducerEntity P ON R.producerId = P.id;
